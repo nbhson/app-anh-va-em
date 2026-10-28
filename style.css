@@ -12,17 +12,7 @@ body {
 .app {
   background-image: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%);
 }
-.fade-enter-active {
-  transition: all 0.3s ease;
-}
-.fade-leave-active {
-  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  transform: translateX(10px);
-  opacity: 0;
-}
-span {
+.heart-pop {
   position: absolute;
   background: url("./assets/images/heart.svg");
   pointer-events: none;
@@ -30,10 +20,11 @@ span {
   width: 100px;
   height: 100px;
   background-size: cover;
-  animation: animate 3s linear infinite;
+  animation: animate-heart 3s linear forwards;
+  z-index: 5;
 }
 
-@keyframes animate {
+@keyframes animate-heart {
   0% {
     transform: translate(-50%, -50%);
     filter: hue-rotate(0deg);
@@ -168,11 +159,11 @@ img.avt {
   position: absolute;
   bottom: -70px;
   max-width: 100%;
-  animation: animate calc(8s * var(--i)) linear infinite;
+  animation: animate-cloud calc(8s * var(--i)) linear infinite;
   user-select: none;
 }
 
-@keyframes animate {
+@keyframes animate-cloud {
   0% {
     transform: translateX(-100%);
   }
