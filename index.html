@@ -38,13 +38,16 @@
                 <img
                   src="./assets/images/anh-1.jpeg"
                   class="avt shadow vanilla-tilt"
+                  alt="Ảnh của anh"
+                  width="230"
+                  height="230"
                 />
                 <h3 class="mt-3">Anh nè</h3>
               </div>
             </div>
             <div class="col-sm-12 col-md-4 d-flex justify-content-center">
               <div id="heart" class="text-center">
-                <img src="./assets/images/heart.svg" class="heart" />
+                <img src="./assets/images/heart.svg" class="heart" alt="" />
                 <div id="anni">...</div>
               </div>
             </div>
@@ -53,40 +56,44 @@
                 <img
                   src="./assets/images/em-1.jpeg"
                   class="avt shadow vanilla-tilt"
+                  alt="Ảnh của em"
+                  width="230"
+                  height="230"
                 />
                 <h3 class="mt-3">Em nè</h3>
               </div>
             </div>
           </div>
+
+          <div class="milestones text-center">
+            <p id="together-breakdown" class="milestone-line">❤️</p>
+            <p id="next-anniversary" class="milestone-line muted"></p>
+          </div>
+
           <h4 class="text-center">
-            Mãi yêu em.. <img src="./assets/images/heart.svg" width="18" />
+            Mãi yêu em.. <img src="./assets/images/heart.svg" width="18" alt="" />
           </h4>
         </div>
       </div>
 
       <div class="banner">
         <div class="clouds">
-          <img src="./assets/images/cloud1.png" style="--i: 1" />
-          <img src="./assets/images/cloud2.png" style="--i: 2" />
-          <img src="./assets/images/cloud3.png" style="--i: 3" />
-          <img src="./assets/images/cloud4.png" style="--i: 4" />
-          <img src="./assets/images/cloud5.png" style="--i: 5" />
-          <div
-            style="
-              position: absolute;
-              bottom: 0;
-              background: linear-gradient(to top, #fff, transparent);
-              width: 100%;
-              height: 100px;
-            "
-          ></div>
+          <img src="./assets/images/cloud1.png" style="--i: 1" alt="" aria-hidden="true" />
+          <img src="./assets/images/cloud2.png" style="--i: 2" alt="" aria-hidden="true" />
+          <img src="./assets/images/cloud3.png" style="--i: 3" alt="" aria-hidden="true" />
+          <img src="./assets/images/cloud4.png" style="--i: 4" alt="" aria-hidden="true" />
+          <img src="./assets/images/cloud5.png" style="--i: 5" alt="" aria-hidden="true" />
+          <div class="cloud-fade" aria-hidden="true"></div>
         </div>
       </div>
     </div>
 
-    <audio id="myAudio" controls loop preload="auto" muted>
-      <source src="./assets/audio/LoveStory.mp3" type="audio/mp3" />
-    </audio>
+    <div class="music-bar" role="region" aria-label="Trình phát nhạc">
+      <button type="button" class="icon-btn" id="music-prev" aria-label="Bài trước" title="Bài trước">⏮</button>
+      <audio id="myAudio" controls loop preload="auto" muted></audio>
+      <button type="button" class="icon-btn" id="music-next" aria-label="Bài sau" title="Đổi bài">⏭</button>
+      <span id="music-track" class="music-track">Love Story</span>
+    </div>
 
     <script src="./app.js"></script>
   </body>
