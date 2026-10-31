@@ -1,5 +1,7 @@
 # Anh Và Em 💞
 
+[![CI](https://github.com/nbhson/app-anh-va-em/actions/workflows/ci.yml/badge.svg)](https://github.com/nbhson/app-anh-va-em/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 Trang kỷ niệm ngày yêu nhau — đếm số ngày bên nhau, đồng hồ thời gian thực và hiệu ứng trái tim bay khi chạm/click.
 
 Xây dựng bằng **vanilla HTML/CSS/JS + Bootstrap 5 CSS**, không cần build, không cần backend.
