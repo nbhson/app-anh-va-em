@@ -19,7 +19,9 @@
     />
     <link rel="stylesheet" href="./style.css" />
   </head>
-  <body>
+  <body data-anniversary="2024-01-14T00:00:00">
+    <!-- CONFIG: đổi ngày bắt đầu đếm ở attribute data-anniversary trên <body> (định dạng yyyy-mm-ddThh:mm:ss, giờ local).
+         Nếu bỏ attribute, app.js dùng hằng số ANNIVERSARY_DATE. -->
     <div class="app">
       <div class="full-screen d-flex justify-content-center align-items-center">
         <div class="content card card-parent border-0">
@@ -41,6 +43,7 @@
                   alt="Ảnh của anh"
                   width="230"
                   height="230"
+                  loading="lazy"
                 />
                 <h3 class="mt-3">Anh nè</h3>
               </div>
@@ -59,6 +62,7 @@
                   alt="Ảnh của em"
                   width="230"
                   height="230"
+                  loading="lazy"
                 />
                 <h3 class="mt-3">Em nè</h3>
               </div>
@@ -89,8 +93,9 @@
     </div>
 
     <div class="music-bar" role="region" aria-label="Trình phát nhạc">
+      <button type="button" class="icon-btn" id="music-toggle" aria-label="Bật/tắt nhạc" title="Bật/tắt nhạc">🔇</button>
       <button type="button" class="icon-btn" id="music-prev" aria-label="Bài trước" title="Bài trước">⏮</button>
-      <audio id="myAudio" controls loop preload="auto" muted></audio>
+      <audio id="myAudio" controls loop preload="none" muted></audio>
       <button type="button" class="icon-btn" id="music-next" aria-label="Bài sau" title="Đổi bài">⏭</button>
       <span id="music-track" class="music-track">Love Story</span>
     </div>

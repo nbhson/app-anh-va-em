@@ -1,4 +1,8 @@
-const yourDate = new Date("2024-01-14T00:00:00");
+// ---------- CONFIG ----------
+// Ngày bắt đầu đếm (kỷ niệm). Ưu tiên attribute data-anniversary trên <body> của index.html;
+// nếu không có thì dùng hằng số dưới đây. Không cần đọc code logic phía dưới để đổi ngày.
+const ANNIVERSARY_DATE = "2024-01-14T00:00:00";
+let yourDate = new Date(ANNIVERSARY_DATE);
 const HEART_LIFETIME_MS = 3000;
 const MAX_HEARTS = 40; // chặn hiện tượng tim chồng chất khi click liên tục
 
@@ -9,6 +13,13 @@ const TRACKS = [
 ];
 
 document.addEventListener("DOMContentLoaded", function () {
+  // Đọc config ngày kỷ niệm từ data-anniversary (nếu có, hợp lệ) — ghi đè hằng số mặc định.
+  const dateAttr = document.body?.getAttribute("data-anniversary");
+  if (dateAttr) {
+    const parsed = new Date(dateAttr);
+    if (!isNaN(parsed.getTime())) yourDate = parsed;
+  }
+
   var rootTime = document.querySelector("time");
   var anniEl = document.getElementById("anni");
   var dateEl = document.getElementById("date");
@@ -121,9 +132,16 @@ function playAudio() {
       console.error("Không phát được nhạc:", e);
     });
   } else {
-    audio.muted = true;
     audio.pause();
   }
+  syncToggleIcon();
+}
+
+// Icon nút bật/tắt nhạc phản ánh đúng trạng thái (🔇 khi chưa phát/không có tiếng).
+function syncToggleIcon() {
+  var btn = document.getElementById("music-toggle");
+  var audio = document.getElementById("myAudio");
+  if (btn && audio) btn.textContent = audio.paused || audio.muted ? "🔇" : "🔊";
 }
 
 function initPlaylist() {
@@ -133,11 +151,21 @@ function initPlaylist() {
   loadTrack(0);
 
   // Bắt đầu bằng mute để đi qua chính sách autoplay của trình duyệt;
-  // click bất kỳ sẽ mở tiếng (playAudio()).
+  // người dùng bấm nút loa (music-toggle) để mở tiếng (playAudio()).
   audio.muted = true;
   audio.play().catch(function (e) {
     // Autoplay bị chặn là hành vi bình thường khi chưa có user gesture.
-    console.info("Autoplay bị trình duyệt chặn — bấm để bật nhạc.", e);
+    console.info("Autoplay bị trình duyệt chặn — bấm nút loa để bật nhạc.", e);
+  });
+  syncToggleIcon();
+  // Đồng bộ icon loa cả khi người dùng điều khiển bằng control native của <audio>.
+  ["play", "pause", "volumechange"].forEach(function (ev) {
+    audio.addEventListener(ev, syncToggleIcon);
+  });
+
+  // Nút bật/tắt nhạc — cách duy nhất để toggle phát/dừng (click nền KHÔNG đổi nhạc).
+  document.getElementById("music-toggle")?.addEventListener("click", function () {
+    playAudio();
   });
 
   document.getElementById("music-next")?.addEventListener("click", function () {
@@ -152,7 +180,8 @@ function initPlaylist() {
 }
 
 document.addEventListener("click", function (e) {
-  // Chỉ hiệu ứng tim khi click nền — bỏ qua click vào điều khiển audio/link.
+  // Click nền chỉ tạo hiệu ứng tim — KHÔNG toggle nhạc (tránh bật/tắt ngoài ý muốn).
+  // Nhạc chỉ điều khiển qua music-bar: nút loa (music-toggle), ⏮/⏭, hoặc control của <audio>.
   if (e.target.closest("button, a, input, select, textarea, audio, .music-bar")) return;
 
   const body = document.body;
@@ -172,6 +201,4 @@ document.addEventListener("click", function (e) {
   setTimeout(function () {
     heart.remove();
   }, HEART_LIFETIME_MS);
-
-  playAudio();
 });
